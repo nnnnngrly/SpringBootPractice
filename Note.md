@@ -63,11 +63,30 @@ HTTP Method와 결합하여 의미를 알 수 있도록 + 일반적으로 복수
 2. **@RequestParam**
 - Query String 방식 (값을 입력받을 때 사용하는데 사람마다 다름)
 - http://.../products***?name={value}**
-1. **@RequestBody**
+3. **@RequestBody**
 - http://.../products
 - Body에 객체를 담아서 보냄 (url 안 건드림)
 
-1. @ModelAttribute
-2. **@PathVariable**
+4. @ModelAttribute
+5. **@PathVariable**
 - 정해져 있는 system의 값을 사용할 때 (사람마다 다름)
 - http://.../products/**{value}**
+
+---
+# 줄여 쓰기
+
+@Controller + @ResponseBody
+- Controller + ResponseBody = RestAPI
+- **@RestController**
+
+@RequestMapping(value, method = "RequestMethod.{method}")
+- @GetMapping, @PostMapping, ...@{method}Mapping
+
+---
+# 클린 코드를 위한 메소드 명
+1. method명은 "동사" <- 동작, 기능, 행위 등을 표현하기 때문
+2. 의미만 제대로 담고 있으면 됨 (굳이 자료구조를 끼울 필요는 X)
+
+---
+# @Configuration
+- 설정 파일(`.xml`)을 자바로 표현했음을 알리는 어노테이션

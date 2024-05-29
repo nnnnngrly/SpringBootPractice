@@ -1,6 +1,8 @@
 package com.example.demo.product;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Repository;
@@ -21,5 +23,9 @@ public class ProductRepository {
     public void save(Product product) {
         db.put(id++, product);
         // System.out.println(product.getName());
+    }
+
+    public List<Product> findAllProducts() {
+        return new ArrayList<>(db.values());
     }
 }
