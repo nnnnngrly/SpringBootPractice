@@ -7,7 +7,7 @@ import java.util.Map;
 
 import org.springframework.stereotype.Repository;
 
-@Repository
+// @Repository
 public class ProductRepository {
     // DataBase와 소통
     

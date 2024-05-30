@@ -35,6 +35,16 @@ C(Controller) : Model과 View를 이어주는 가교 역할
 Spring Bean 등록 : 직접 객체를 생성하는 대신, 스프링이 객체를 생성하고 관리하도록 요청하는 것
 - 1) @Component 어노테이션 사용
 - 2) @Configuration + @Bean 사용
+```java
+@Configuration
+public class AppConfig {
+
+    @Bean // 아래 메소드가 반환하는 객체를 Spring Bean으로 등록
+    public ProductRepository productRepository(){
+        return new ProductRepository();
+    }
+}
+```
 => @Autowired를 통해 등록된 빈을 사용할 수 있음
 
 ---
