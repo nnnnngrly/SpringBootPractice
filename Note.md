@@ -90,8 +90,7 @@ HTTP Method와 결합하여 의미를 알 수 있도록 + 일반적으로 복수
 - **@RestController**
 
 @RequestMapping(value, method = "RequestMethod.{method}")
-- @GetMapping, @PostMapping, ...@{method}Mapping
-
+- @GetMapping, @PostMapping, ...@{method}Mapping'  
 ---
 # 클린 코드를 위한 메소드 명
 1. method명은 "동사" <- 동작, 기능, 행위 등을 표현하기 때문
@@ -100,3 +99,28 @@ HTTP Method와 결합하여 의미를 알 수 있도록 + 일반적으로 복수
 ---
 # @Configuration
 - 설정 파일(`.xml`)을 자바로 표현했음을 알리는 어노테이션
+
+---
+# JPA
+JPA (Java Persistence API) : 자바 지속(영속)성 API
+- Java의 객체를 JVM 밖에서도 지속하기 위해, DB에 저장할 때 사용하는 API
+- Java의 Variable Type을 DB에 맞춰 매핑/변환 (**파라다임 불일치 해결**)
+  - **ORM** : Object-Relational Mapping
+
+---
+# Application.properties
+프로젝트의 속성값 정의 및 변경 가능 (Logic과 관련 없는 파일 저장)
+- **DB 연결**
+  - JDBC를 사용하려면, "DataSource 객체" 속성을 정의해야 함
+    - `spring.datasource.driver-class-name` 드라이버 설정 (어떤 DB를 사용할 것인지)
+    - `spring.datasource.username` DB 계정
+    - `spring.datasource.password` DB 비밀번호
+    - `spring. datasource.url` 사용하고자 하는 DB의 주소
+  
+- Port Number 변경
+- Project 이름 변경, 로그 파일 저장 경로
+
+build.gradle - dependencies 에 추가
+  - `runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'`
+  - `implementaton 'org.springframework.boot:spring-boot-starter-jdbc'`
+

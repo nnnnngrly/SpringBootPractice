@@ -26,4 +26,8 @@ public class ProductService {
     public List<Product> findAllProducts() {
         return productRepository.findAllProducts();
     }
+
+    public void makeConnection(){
+        productRepository.makeConnection();
+    }
 }
