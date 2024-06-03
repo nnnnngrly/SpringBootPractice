@@ -8,8 +8,8 @@ import java.util.Map;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.datasource.DataSourceUtils;
-import org.springframework.stereotype.Repository;
+// import org.springframework.jdbc.datasource.DataSourceUtils;
+// import org.springframework.stereotype.Repository;
 
 // @Repository
 public class ProductRepository {
@@ -19,9 +19,9 @@ public class ProductRepository {
     DataSource dataSource;
 
     // DataSource로 터널 뚫어보기 (=DB와의 커넥션 생성)
-    public void makeConnection () {
-        DataSourceUtils.getConnection(dataSource);
-    }
+    // public void makeConnection () {
+    //     DataSourceUtils.getConnection(dataSource);
+    // }
     
     // 아직 DB와 연동할 수 없기 때문에 임시로 Map을 만들어서 DB처럼 사용
     // Java의 Map은 Key-vale pair의 자료구조 (python Dict, js Object)
