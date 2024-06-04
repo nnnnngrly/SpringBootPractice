@@ -40,13 +40,6 @@ public class ProductController {
         return productService.findProduct(id);
     }
 
-    // // 상품 등록
-    // @RequestMapping(value = "products", method = RequestMethod.POST)
-    // public void saveProduct(@RequestParam(value="name") String productName) {
-    //     //localhost:8080/products?name="XX"의 XX를 productName이라는 변수로 보내준다.
-    //     productService.saveProduct(productName);
-    // }    
-
     // 상품 등록
     // @RequestMapping(value = "products", method=RequestMethod.POST)
     @PostMapping("products") // @RequestMapping(method="Post") 대체

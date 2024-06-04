@@ -1,6 +1,6 @@
 package com.example.demo.product;
 
-import java.util.ArrayList;
+// import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,12 +11,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 // import org.springframework.jdbc.datasource.DataSourceUtils;
 // import org.springframework.stereotype.Repository;
 
+import jakarta.persistence.EntityManager;
+
 // @Repository
 public class ProductRepository {
     // DataBase와 소통 
 
     @Autowired
     DataSource dataSource;
+
+    @Autowired
+    EntityManager entityManager; // DB에 CRUD 할 수 있도록 Method를 제공
 
     // DataSource로 터널 뚫어보기 (=DB와의 커넥션 생성)
     // public void makeConnection () {
@@ -32,12 +37,21 @@ public class ProductRepository {
         return db.get(idx);
     }
 
-    public void save(Product product) {
-        db.put(id++, product);
-        // System.out.println(product.getName());
+    // public void save(Product product) {
+    //     db.put(id++, product);
+    //     // System.out.println(product.getName());
+    // }
+
+    // public List<Product> findAllProducts() {
+    //     return new ArrayList<>(db.values());
+    // }
+
+    // 이제 실제 DB를 사용하여 연동
+    public List<Product> findAllProducts() {
+        return entityManager.createQuery("SELECT p FROM Product p", Product.class).getResultList();
     }
 
-    public List<Product> findAllProducts() {
-        return new ArrayList<>(db.values());
+    public void save(Product product) {
+        entityManager.persist(product);
     }
 }

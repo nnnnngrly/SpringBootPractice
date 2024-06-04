@@ -124,3 +124,61 @@ build.gradle - dependencies 에 추가
   - `runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'`
   - `implementaton 'org.springframework.boot:spring-boot-starter-jdbc'`
 
+---
+JPA : 자바 객체 <-> "Mapping **Entity**" in EntityContext <-> DB (Entity와 DB는 1:1로 매핑)
+  - Entity Context : JPA가 Entity를 관리하기 위한 공간 (Mapping을 고려하는 공간)
+    - EntityManager : Entity Context에서 Entity를 관리
+JDBC API -> Datasource (Interface) -> Hikari (구현체) : DB로 가는 터널 연결, SQL 전달 etc
+JPA(API) -> EntityManager (Interface) -> Hibernate (구현체) : Entity를 관리
+  - CRUD 작업 수행 위한 Method 제공, 라이프 사이클 관리, 영속성 관리
+
+Entity Manager가 Interface면 여러 개의 구현체가 있을 수도 있지 않을까?
+-> Spring에서 JPA의 기본 구현체로 Hibernate를 선정하였다. 
+
+---
+Entity를 관리하기 위한 annotation : @Entity
+- 여기서는 "product"객체 위에 표시
+
+---
+# EntityManager가 가진 method 
+1. 테이블 조회 (Select)
+- `entityManager.createQuery({String:query}, {class}).getResultList()` // 전체 조회 (CRUD 미제공 -> 자체적으로 쿼리 생성)
+- `find(id)` : 개별 조회
+  
+2. 객체 등록 (Insert)
+- `persist({객체})` : 객체 저장 (J"**P**"A 니까, 영속성을 부여한다는 의미) 
+
+---
+# JPQL
+SQL : SELECT * FROM product(테이블 명)
+   - JPQL : SELECT p FROM Product p
+     - Product Class를 p라 칭하고, 해당 테이블에서 p(전체 테이블)을 가져온다.
+
+---
+# JPA 키워드 총 정리
+
+**JPA** : Java의 영속성을 지켜주는 API (자바의 객체를 JVM 밖에서 사용하기 위해 ORM 매핑을 통해 DB에 저장)
+**Hibernate** : JPA (Interface)를 구현하기 위해 Spring이 선택한 구현체 (Default; 변경 가능)
+
+**Entity** : DB와 1:1로 Mapping할 수 있는 자바 객체
+**EntityManager** : Mapping 관리, CRUD Method 지원 ...
+**EntityContext** : Java와 DB 사이에 Entity를 관리/저장하는 공간
+
+**@Entity** : Entity로 등록하기 위한 Annotation
+**@Id** : 식별자 등록을 위한 Annotation
+
+---
+# Spring Data JPA
+
+Spring이 제공해주는 JPA Interface
+- JPA : EntityManager, CreateQuery ... 복잡한 느낌 => 추상화한 느낌(Spring Data JPA)
+- 메서드 간결, 보다 많은 기능 제공
+- 페이징 기능 제공
+  - 1 page (1~ 10번 상품), 2 page (11 ~ 20번 상품)...
+
+---
+**DTO**
+데이터 전송 객체 : 데이터를 전송하기 위해 사용하는 객체 -> "사본"의 역할 수행
+- Entity가 직접 Controller까지 왔다갔다 하기에는 위험함
+- 사용자는 년도로 입력 -> DB에는 나이로 저장
+  - 사용자의 입력을 manipulate
